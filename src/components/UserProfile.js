@@ -1,22 +1,39 @@
-// src/components/UserProfile.js
-// The UserProfile component is used to demonstrate the use of Route and Link.
+import React from "react";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import AccountBalance from "./AccountBalance";
 
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-
-class UserProfile extends Component {
-  render() {
-    return (
-        <div>
-          <h1>User Profile</h1>
-
-          <div>Username: {this.props.userName}</div>
-          <div>Member Since: {this.props.memberSince}</div>
-          
-          <Link to="/">Return to Home</Link>
-        </div>
-    );
-  }
+function UserProfile(props) {
+  return (
+    <div>
+      {!props.info.currentUser.login && <Navigate to="/" />}
+      {props.info.currentUser.login && (
+        <>
+          <div className="links">
+            <Link to="/" className="loglink">
+              Home
+            </Link>
+            <Link to="/Debits" className="loglink">
+              Debits
+            </Link>
+            <Link to="/Credits" className="loglink">
+              Credits
+            </Link>
+          </div>
+          <h1 className="titles">User Profile</h1>
+          <div className="profile-el">
+            <div className="info">
+              Username: {props.info.currentUser.userName}
+            </div>
+            <div className="info">
+              Member Since: {props.info.currentUser.memberSince}
+            </div>
+            <AccountBalance accountBalance={props.info.accountBalance} />
+          </div>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default UserProfile;
