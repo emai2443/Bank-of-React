@@ -1,11 +1,10 @@
-// src/App.js
-
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import LogIn from "./components/Login";
 import Credits from "./components/Credits";
+import Balance from "./components/Balance";
 
 function App() {
   const [state, setState] = useState({
@@ -56,17 +55,7 @@ function App() {
             />
           }
         />
-        <Route
-          exact
-          path="/Credits"
-          element={
-            <Credits
-              accountBalance={state.accountBalance}
-              login={state.currentUser.login}
-              onChange={handleChange}
-            />
-          }
-        />
+        <Route exact path="/balance" element={<Balance info={state} />} />
       </Routes>
     </Router>
   );
