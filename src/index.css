@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -9,10 +9,95 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-input, button {
-	margin: 5px;
+input,
+button {
+  margin: 5px;
+}
+
+.links {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  justify-content: center;
+  width: 100%;
+  color: black;
+  font-weight: bold;
+}
+.nav-link {
+  border: 1px goldenrod;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(14, 54, 235);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: white;
+  color: rgb(203, 32, 218);
+  transition: all 200ms ease-in;
+}
+
+.creds {
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  width: 100%;
+  grid-area: text;
+  font-family: "Sarpanch", sans-serif;
+  font-size: vmin;
+  margin: 0;
+  margin-top: 40px;
+  color: #1d9099;
+  text-shadow: 0.3vmin 0.3vmin 0 #10e722, -0.3vmin -0.3vmin 0 #33c2d5;
+}
+.balance {
+  margin-top: 40px;
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  color: rgb(0, 250, 21);
+}
+
+.debit,
+.credit {
+  list-style-type: none;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  gap: 25px;
+  text-align: center;
+  border: 1px solid black;
+  width: 50%;
+  border-radius: 10px;
+  background-color: rgb(97, 223, 212);
+  font-style: bold;
+}
+.date {
+  font-size: 20px;
+  text-decoration: underline;
+  font-weight: thin;
+}
+.form_style {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  gap: 25px;
+  text-align: center;
+  border: 1px solid black;
+  width: 50%;
+  border-radius: 10px;
+  background-color: goldenrod;
 }

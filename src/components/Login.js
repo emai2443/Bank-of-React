@@ -1,61 +1,54 @@
-// src/components/Login.js
-// The LogIn component is used to demonstrate the use of Redirect.
+import React from "react";
+import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+export default function Login(props) {
+  const [credentials, setCredentials] = useState({
+    user: {
+      userName: "",
+      password: "",
+    },
+    redirect: false,
+  });
+  const handleChange = (event) => {
+    const updatedUser = { ...credentials.user };
+    const inputField = event.target.name;
+    const inputValue = event.target.value;
+    updatedUser[inputField] = inputValue;
 
-class LogIn extends Component {
-  constructor () {  // Create and initialize state
-    super()
-    this.state = {
-      user: {
-        userName: '',
-        password: ''
-      },
-      redirect: false
-    }
+    setCredentials({ user: updatedUser });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.mockLogIn(credentials.user);
+    setCredentials({ redirect: true });
+  };
+  if (credentials.redirect) {
+    return <Navigate to="/userProfile" />;
   }
 
-  // When the user name input is changed, capture the input and update the state (user.userName)
-  handleChange = (e) => {
-    const updatedUser = {...this.state.user}
-    const inputField = e.target.name
-    const inputValue = e.target.value
-    updatedUser[inputField] = inputValue
-
-    this.setState({user: updatedUser})
-  }
-
-  // When user clicked "Log In" button, store user data and then redirect to "User Profile" page
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.mockLogIn(this.state.user)
-    this.setState({redirect: true})
-  }
-  
-  render () {
-    if (this.state.redirect) {  // Redirect to "User Profile" page when "Log In" button is clicked
-      return (<Redirect to="/userProfile"/>)
-    }
-    // Render the login form
-    return (
-      <div>
-        <h1>Login</h1>
-
-        <form onSubmit={this.handleSubmit}>
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="logInfo">
           <div>
-            <label htmlFor="userName">User Name</label>
-            <input type="text" name="userName" onChange={this.handleChange} value={this.state.user.userName} />
+            <label htmlFor="userName">User Name:</label>
+            <input
+              className="inputbtn"
+              type="text"
+              name="userName"
+              placeholder="user name..."
+              value={credentials.user.userName}
+              onChange={handleChange}
+            />
           </div>
           <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" />
+            <label htmlFor="password">Enter Password:</label>
+            <input placeholder="password..." type="password" name="password" />
           </div>
-          <button>Log In</button>
-        </form>                  
-      </div>
-    )
-  }
+        </div>
+        <button className="logbtn">Log In</button>
+      </form>
+    </div>
+  );
 }
-
-export default LogIn
