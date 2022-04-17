@@ -1,48 +1,48 @@
-// src/App.js
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./components/Home";
+import UserProfile from "./components/UserProfile";
+import LogIn from "./components/Login";
+import Credits from "./components/Credits";
+import Balance from "./components/Balance";
+import Debits from "./components/Debits";
 
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Home from './components/Home';
-import UserProfile from './components/UserProfile';
-import LogIn from './components/Login';
-
-class App extends Component {
-  constructor() {  // Create and initialize state
-    super(); 
-    this.state = {
-      accountBalance: 14568.27,
-      currentUser: {
-        userName: 'Joe Smith',
-        memberSince: '07/23/96',
-      }
-    }
-  }
+function App() {
+  const [state, setState] = useState({
+    accountBalance: 14568.27,
+    currentUser: {
+      userName: "Joe Smith",
+      memberSince: "07/23/96",
+      login: false,
+    },
+  });
 
   // Update state's currentUser (userName) after "Log In" button is clicked
-  mockLogIn = (logInInfo) => {  
-    const newUser = {...this.state.currentUser}
-    newUser.userName = logInInfo.userName
-    this.setState({currentUser: newUser})
+  function mockLogIn(logInInfo) {
+    const newUser = { ...state.currentUser };
+    newUser.userName = logInInfo.userName;
+    newUser.memberSince = new Date().toISOString().slice(0, 10);
+    newUser.login = true;
+    setState({ ...state, currentUser: newUser });
   }
 
-  // Create Routes and React elements to be rendered using React components
-  render() {  
-    const HomeComponent = () => (<Home accountBalance={this.state.accountBalance}/>);
-    const UserProfileComponent = () => (
-      <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince}  />
-    );
-    const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)  // Pass props to "LogIn" component
-
-    return (
-      <Router>
-        <div>
-          <Route exact path="/" render={HomeComponent}/>
-          <Route exact path="/userProfile" render={UserProfileComponent}/>
-          <Route exact path="/login" render={LogInComponent}/>
-        </div>
-      </Router>
-    );
+  function handleChange(amount) {
+    const balance = Number(state.accountBalance) + Number(amount);
+    setState({ ...state, accountBalance: balance });
   }
+
+  return (
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Home info={state} />}/>
+        <Route exact path="/login" element={<LogIn user={state.currentUser} mockLogIn={mockLogIn} />}/>
+        <Route exact path="/userProfile" element={<UserProfile info={state} />} />
+        <Route exact path="/Credits" element={<Credits accountBalance={state.accountBalance} login={state.currentUser.login} onChange={handleChange} />}/>
+        <Route exact path="/balance" element={<Balance info={state} />} />
+        <Route exact path="/Debits" element={<Debits accountBalance={state.accountBalance} login={state.currentUser.login} onChange={handleChange} />}/>
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
