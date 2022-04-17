@@ -66,7 +66,7 @@ const Debits = (props) => {
       </Link>
     </div>
     <h1 className='titles'>Debits</h1>
-    <h3 className="creds">By:Richard Vazquez</h3>
+    <h3 className="creds">By: Richard Vazquez</h3>
     <div className='balance'>Balance: ${props.accountBalance}</div>
     <div className='debits'>{display}</div>
     <form className="form_style" onSubmit={handleSubmit}>
