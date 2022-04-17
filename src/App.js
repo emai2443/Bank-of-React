@@ -35,6 +35,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Home info={state} />}/>
+        <Route exact path="/react-Bank-of-React" element={<Home info={state} />}/>  {/* this is for rich, the app was starting weird on my end */}
         <Route exact path="/login" element={<LogIn user={state.currentUser} mockLogIn={mockLogIn} />}/>
         <Route exact path="/userProfile" element={<UserProfile info={state} />} />
         <Route exact path="/Credits" element={<Credits accountBalance={state.accountBalance} login={state.currentUser.login} onChange={handleChange} />}/>
