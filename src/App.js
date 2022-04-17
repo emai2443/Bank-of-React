@@ -5,6 +5,7 @@ import UserProfile from "./components/UserProfile";
 import LogIn from "./components/Login";
 import Credits from "./components/Credits";
 import Balance from "./components/Balance";
+import Debits from "./components/Debits";
 
 function App() {
   const [state, setState] = useState({
@@ -33,29 +34,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home info={state} />} />
-        <Route
-          exact
-          path="/login"
-          element={<LogIn user={state.currentUser} mockLogIn={mockLogIn} />}
-        />
-        <Route
-          exact
-          path="/userProfile"
-          element={<UserProfile info={state} />}
-        />
-        <Route
-          exact
-          path="/Credits"
-          element={
-            <Credits
-              accountBalance={state.accountBalance}
-              login={state.currentUser.login}
-              onChange={handleChange}
-            />
-          }
-        />
+        <Route exact path="/" element={<Home info={state} />}/>
+        <Route exact path="/login" element={<LogIn user={state.currentUser} mockLogIn={mockLogIn} />}/>
+        <Route exact path="/userProfile" element={<UserProfile info={state} />} />
+        <Route exact path="/Credits" element={<Credits accountBalance={state.accountBalance} login={state.currentUser.login} onChange={handleChange} />}/>
         <Route exact path="/balance" element={<Balance info={state} />} />
+        <Route exact path="/Debits" element={<Debits accountBalance={state.accountBalance} login={state.currentUser.login} onChange={handleChange} />}/>
       </Routes>
     </Router>
   );
